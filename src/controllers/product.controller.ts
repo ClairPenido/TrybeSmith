@@ -1,5 +1,4 @@
-import { Request, Response } from 'express';
-// import { Products } from '../interfaces';
+import { NextFunction, Request, Response } from 'express';
 import ProductService from '../services/product.service';
 
 export default class ProductController {
@@ -14,13 +13,14 @@ export default class ProductController {
     return res.status(200).json(products);
   };
 
-  // public createProduct = async (req: Request<{}, {}, Omit<Products, 'id'>>, res: Response) => {
-  //   try {
-  //     const product = req.body;
-  //     this.service.create(product);
-  //     return res.status(201).json({ message: 'product created successfully' });
-  //   } catch (err) {
-  //     throw new Error('Error creating product');
-  //   }
-  // };
+  public createProduct = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { name, amount } = req.body;
+      console.log('controller', req.body);
+      const newProduct = await this.service.create({ name, amount });
+      return res.status(201).json(newProduct);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
