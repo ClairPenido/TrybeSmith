@@ -22,3 +22,9 @@ export interface Orders {
 export interface Token {
   token: string;
 }
+
+export interface Login {
+  id?: number,
+  username: string,
+  password: string;
+}
