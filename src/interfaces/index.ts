@@ -13,6 +13,12 @@ export interface Users {
   password: string,
 }
 
+export interface Orders {
+  id: number;
+  userId: number;
+  productsId: number | number[]; // para o caso de 2 numeros
+}
+
 export interface Token {
   token: string;
 }
