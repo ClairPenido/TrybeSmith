@@ -12,6 +12,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
   const { error } = loginSchema.validate({ username, password });
 
   if (error) {
+    console.log('entrou validation');
     throw new CustomError(error.details[0].message, 400);
   }
   next();
